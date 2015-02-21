@@ -1,12 +1,13 @@
 $(document).ready(function(){ 
 	$("body").on("click", "#register", function() {
-		window.location.href = "http://arthurmarks.tk/codefest/Registration.php";
+		window.location.href = "Registration.php";
 	});
 	
 	$("body").on("click", "#sub_reg", function() {
+		alert("made it");
 		$.ajax({ 
 			type: 'POST',
-			url: '/rest/Register.php', 
+			url: 'rest/Register.php', 
 			data: $('#reg').serialize()
 		})
 		.success(function(data){  
