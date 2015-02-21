@@ -219,21 +219,19 @@ $stmt->close();
 
 $mysql->close();
 ?>
+<form id="form1" name="form1" method="post">
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="jQueryAssets/jquery.ui-1.10.4.datepicker.min.js" type="text/javascript"></script>
 
-<form id="form1" name="form1" method="post">
-  <p>DATABASE MODIFICATION SCRIPT</p>
+<p>DATABASE MODIFICATION SCRIPT</p>
   <p>This script is used for entering data directly into the database for testing purposes. No data validation is performed.</p>
   <p>&nbsp;</p>
   <p>
-    <input type="text" id="Datepicker1">
-    <br>
   </p>
-  <hr>
+<hr>
 <!--  
 <p><strong>USER DATA</strong></p>
   <p>
@@ -319,19 +317,19 @@ Suffix:</label>
 	   $val = $line['CompanyName'];
 	   echo "<option value='".$id."'>".$val."</option>";
    }
-   echo "</select>"; echo "<br>
-    Job title:
+   echo "</select>"; echo "<br>Job title:
     <input type='text' name='txtJD_JT' id='txtJD_JT' value='$jd_jt'>
     <br>
      Salary:
       <input type='text' name='txtJD_SA' id='txtJD_SA' value='$jd_sa'>
     <br>
     Start date:
-    <input type='text' name='txtJD_SD' id='txtJD_SD' value='$jd_sd'>
-(MM-DD-YYYY)<br>
+    
+    <input name='txtJD_SD' type='text' id='txtJD_SD'>
+    <br>
 End date:
-<input type='text' name='txtJD_ED' id='txtJD_ED' value='$jd_ed'>
-(MM-DD-YYYY)<br>
+<input name='txtJD_ED' type='text' id='txtJD_ED'>
+<br>
     Job description:
     <textarea name='txtJD_JD' cols='100' rows='10' id='txtJD_JD' form='form1'>$jd_jd</textarea>
     <br>
@@ -342,15 +340,23 @@ End date:
     <textarea name='txtJD_JB' cols='100' rows='10' id='txtJD_JB' form='form1'>$jd_jb</textarea>
     <br>
     <input type='submit' name='btnJD_Submit' id='btnJD_Submit' value='Submit'>
+    
   </p>
 </form>";
 ?>
 <script type="text/javascript">
 $(function() {
-	$( "#Datepicker1" ).datepicker({
+	$( "#txtJD_SD" ).datepicker({
 		changeMonth:true,
 		changeYear:true,
 		showButtonPanel:true
 	}); 
 });
-  </script>
+$(function() {
+	$( "#txtJD_ED" ).datepicker({
+		changeMonth:true,
+		changeYear:true,
+		showButtonPanel:true
+	}); 
+});
+</script>
