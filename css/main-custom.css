@@ -76,12 +76,18 @@ a:active {
 	position:absolute;
 	left:200px;
 	top:40px;
-}
+} 
 
 #head_nav{
 	position:absolute;
 	top:28px;
 	left:400px;
+}
+
+#content{
+	position:absolute;
+	top:85px;
+	left:10px;
 }
 
 #mainNav{

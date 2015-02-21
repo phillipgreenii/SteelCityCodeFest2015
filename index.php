@@ -13,6 +13,7 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+	<script src="js/main-custom.js"></script>
 </head>
 
 <body>
@@ -60,10 +61,10 @@
 								<input type="password" name="password" id="password" value="">
 							</p>
 						</form>
-					</div>
+					</div>  
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="register" class="btn btn-primary">Register</button>
+					<button type="button" id="register" class="btn btn-primary">Register</button> 
 					<button type="button" id="login" class="btn btn-primary">Login</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					
