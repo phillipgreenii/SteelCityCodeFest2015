@@ -11,20 +11,35 @@ $pageContents = <<< EOPAGE
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main-custom.css">
 
-    <script src="js/jquery-2.1.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div id="head">
-    <h1>Coder's Haven</h1>
+		<span id="header">Coder's Haven</span>
+		<span id="slogan">Catchy Slogan will live here</span>
+		<div id="head_nav">
+			<ul id="nav">
+				<li class="li_Nav"><a href="#">Home</a></li>
+				<li class="li_Nav"><a href="#">About</a></li>
+				<li class="li_Nav"><a href="#">Contact</a></li>
+				<li class="li_Nav"><a href="#">Browse</a></li>
+				<li class="li_Nav"><a href="#">Login</a></li>
+			</ul>
+		</div>
 	</div>
 
-  <div id="content">
-  </div>
-	<ul id="foot">
-	</ul>
+	<div id="content">
+	</div>
+  
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Product of Steel City Codefest 2015.</p>
+		</div>
+	</footer>
+
 </body>
 </html>
 EOPAGE;
