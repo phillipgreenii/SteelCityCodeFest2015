@@ -96,3 +96,7 @@ a:active {
 	font-size:20px;
 	width:90px;
 }
+
+#register{
+	float:left;
+}
