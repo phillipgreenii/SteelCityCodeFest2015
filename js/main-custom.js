@@ -28,7 +28,7 @@ $(document).ready(function(){
 		.success(function(data){  
 			alert(data);
 		})
-		.fail(function() {
+		.fail(function(data) {
 			alert(data);
 		})
 	});
