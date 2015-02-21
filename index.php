@@ -1,5 +1,6 @@
 <?php
-
+   
+   
 $pageContents = <<< EOPAGE
 <!doctype html>
 <html lang="en">
