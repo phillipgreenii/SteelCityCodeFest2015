@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2015 at 02:57 PM
+-- Generation Time: Feb 21, 2015 at 04:55 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `JobTitle` text COLLATE latin1_general_ci NOT NULL,
   `Description` text COLLATE latin1_general_ci NOT NULL,
   `Requirements` text COLLATE latin1_general_ci NOT NULL,
-  `Salary` int(11) NOT NULL,
+  `Salary` text COLLATE latin1_general_ci NOT NULL,
   `StartDate` datetime DEFAULT NULL,
   `EndDate` datetime DEFAULT NULL,
   `Benefits` text COLLATE latin1_general_ci NOT NULL,
@@ -83,7 +83,15 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `RoleID` int(11) NOT NULL AUTO_INCREMENT,
   `RoleName` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`RoleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`RoleID`, `RoleName`) VALUES
+(1, 'Candidate'),
+(2, 'Employer');
 
 -- --------------------------------------------------------
 
@@ -101,6 +109,20 @@ CREATE TABLE IF NOT EXISTS `tags` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `usercompany`
+--
+
+DROP TABLE IF EXISTS `usercompany`;
+CREATE TABLE IF NOT EXISTS `usercompany` (
+  `UserID` int(11) NOT NULL,
+  `CompanyID` int(11) NOT NULL,
+  PRIMARY KEY (`UserID`,`CompanyID`),
+  KEY `CompanyID` (`CompanyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userroles`
 --
 
@@ -108,9 +130,7 @@ DROP TABLE IF EXISTS `userroles`;
 CREATE TABLE IF NOT EXISTS `userroles` (
   `RoleID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
-  `CompanyID` int(11) NOT NULL,
   PRIMARY KEY (`RoleID`,`UserID`),
-  KEY `CompanyID` (`CompanyID`),
   KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -162,10 +182,16 @@ ALTER TABLE `companyjobs`
   ADD CONSTRAINT `companyjobs_ibfk_1` FOREIGN KEY (`CompanyID`) REFERENCES `companies` (`CompanyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `usercompany`
+--
+ALTER TABLE `usercompany`
+  ADD CONSTRAINT `usercompany_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `companies` (`CompanyID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usercompany_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `userroles`
 --
 ALTER TABLE `userroles`
-  ADD CONSTRAINT `userroles_ibfk_3` FOREIGN KEY (`CompanyID`) REFERENCES `companies` (`CompanyID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userroles_ibfk_1` FOREIGN KEY (`RoleID`) REFERENCES `roles` (`RoleID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userroles_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
