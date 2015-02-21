@@ -31,8 +31,33 @@ $jd_jd = trim($_POST["txtJD_JD"]);
 $jd_jr = trim($_POST["txtJD_JR"]);
 $jd_jb = trim($_POST["txtJD_JB"]);
 $jd_comp = trim($_POST["cboJD_CM"]);
+$st_tag = trim($_POST["txtST_Tag"]);
+$st_jobs = $_POST["cboST_Jobs"];
 
-if(isset($_POST["btnUD_Submit"]))
+if(isset($_POST["btnST_Submit"]))
+{
+	$query = "INSERT INTO tags(TagText) VALUES(?)";
+	$stmt = $mysql->prepare($query);
+	$tagtext = "";
+	$stmt->bind_param("s", $st_tag);
+	$stmt->execute();
+	$stmt->close();
+	$query = "SELECT TagID FROM tags WHERE TagText = ?";
+	$stmt = $mysql->prepare($query);
+	$stmt->bind_param("s", $st_tag);
+	$stmt->execute();
+	$stmt->bind_result($tid);
+	$stmt->fetch();
+	$stmt->close();
+	$query = "INSERT INTO jobtags(JobID, TagID) VALUES(?,?)";
+	$stmt = $mysql->prepare($query);
+	$stmt->bind_param("ii", $jid, $tid);
+	foreach($st_jobs as $jid)
+	{
+		$stmt->execute();
+	}
+}
+else if(isset($_POST["btnUD_Submit"]))
 {
 	if(count($ud_role) === 0 || $ud_fn === "" || $ud_ln === "" || $ud_em === "" || $ud_pn === "" || $ud_pw === "" || $ud_un === "")
 	{
@@ -217,6 +242,17 @@ while($stmt->fetch() === true)
 }
 $stmt->close();
 
+$query = "SELECT j.JobiD, j.JobTitle, c.CompanyName FROM jobs as j INNER JOIN companyjobs as cj ON j.JobID = cj.JobID INNER JOIN companies as c ON cj.CompanyID = c.CompanyID";
+$stmt = $mysql->prepare($query);
+$stmt->execute();
+$stmt->bind_result($jid, $jtit, $cname);
+$job_arr = array();
+while($stmt->fetch() === true)
+{
+	$job_arr[] = array("JobID"=>$jid,"JobTitle"=>$jtit,"CompanyName"=>$cname);
+}
+$stmt->close();
+
 $mysql->close();
 ?>
 <form id="form1" name="form1" method="post">
@@ -228,9 +264,6 @@ $mysql->close();
 
 <p>DATABASE MODIFICATION SCRIPT</p>
   <p>This script is used for entering data directly into the database for testing purposes. No data validation is performed.</p>
-  <p>&nbsp;</p>
-  <p>
-  </p>
 <hr>
 <!--  
 <p><strong>USER DATA</strong></p>
@@ -341,6 +374,27 @@ End date:
     <br>
     <input type='submit' name='btnJD_Submit' id='btnJD_Submit' value='Submit'>
     
+  </p>
+  <hr>
+  <p><strong>SKILL TAGS</strong></p>
+  <p>Enter tags to be used for job entries.<br>
+    Tag
+      <label for='txtST_Tags'>:</label>
+    <input type='text' name='txtST_Tag' id='txtST_Tag'>
+    <br>
+<label for='cboST_Jobs'>Assign to existing job(s):<br>
+</label>
+    <select name='cboST_Jobs[]' size='5' multiple='MULTIPLE' id='cboST_Jobs'>";
+	foreach($job_arr as $line)
+	{
+		$jid = $job_arr["JobID"];
+		$name = $job_arr["JobTitle"];
+		$comp = $job_arr["CompanyName"];
+		echo "<option value='".$jid."'>".$name." (".$comp.")</option>";
+	}
+    echo"</select>
+    <br>
+    <input type='submit' name='btnST_Submit' id='btnST_Submit' value='Submit'>
   </p>
 </form>";
 ?>
