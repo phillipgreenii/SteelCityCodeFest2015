@@ -15,7 +15,7 @@ $pageContents = <<< EOPAGE
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/main-custom.js"></script> 
+	<script src="js/main-custom.js"></script>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ $pageContents = <<< EOPAGE
 
 	<div id="content">
 		<div id="registration">
-			<form id=reg">
+			<form id="reg">
 				<p>
 					<label for="fname">First Name:</label>
 					<input type="text" name="fname" id="fname">  
@@ -73,12 +73,12 @@ $pageContents = <<< EOPAGE
 
 				<p>
 					<label for="pass">Password:</label>
-					<input type="text" name="pass" id="pass">
+					<input type="password" name="pass" id="pass">
 				</p>
 				
 				<p>
 					<label for="con_pass">Confirm Password:</label>
-					<input type="text" name="con_pass" id="con_pass">  
+					<input type="password" name="con_pass" id="con_pass">  
 				</p>
  
 				<p>
