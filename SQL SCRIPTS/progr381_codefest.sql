@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.7
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2015 at 02:16 PM
--- Server version: 5.5.42-cll
--- PHP Version: 5.4.23
+-- Generation Time: Feb 21, 2015 at 02:51 PM
+-- Server version: 5.5.41-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `progr381_codefest`
+-- Database: `codefest`
 --
-CREATE DATABASE IF NOT EXISTS `progr381_codefest` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
-USE `progr381_codefest`;
 
 -- --------------------------------------------------------
 
@@ -66,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `Description` text COLLATE latin1_general_ci NOT NULL,
   `Requirements` text COLLATE latin1_general_ci NOT NULL,
   `Salary` int(11) NOT NULL,
-  `StartDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `EndDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `StartDate` datetime DEFAULT NULL,
+  `EndDate` datetime DEFAULT NULL,
   `Benefits` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`JobID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
@@ -131,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `LastName` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `MiddleInitial` varchar(1) COLLATE latin1_general_ci NOT NULL,
   `Suffix` varchar(6) COLLATE latin1_general_ci NOT NULL COMMENT 'Junior, Senior, Jr, Sr, III, etc',
+  `Salt` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Username` (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
