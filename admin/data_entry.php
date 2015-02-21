@@ -56,6 +56,7 @@ if(isset($_POST["btnST_Submit"]))
 	{
 		$stmt->execute();
 	}
+	$stmt->close();
 }
 else if(isset($_POST["btnUD_Submit"]))
 {
