@@ -6,19 +6,6 @@ $database = "codefest";
 
 $mysql = new mysqli($host, $username, $password, $database);
 
-$comp_arr = array();
-
-$query = "SELECT * FROM companies";
-
-$stmt = $mysql->prepare($query);
-$stmt->execute();
-$stmt->bind_result($cid, $desc, $addr, $phone, $email, $name);
-while($stmt->fetch() === true)
-{
-	$comp_arr[] = array("CompanyID"=>$cid,"CompanyName"=>$name,"CompanyDescription"=>$desc,"CompanyAddress"=>$addr,"CompanyPhone"=>$phone,"CompanyEmail"=>$email);
-}
-$stmt->close();
-
 $ud_fn = trim($_POST["txtUD_FN"]);
 $ud_ln = trim($_POST["txtUD_LN"]);
 $ud_mi = trim($_POST["txtUD_MI"]);
@@ -217,11 +204,34 @@ else if(isset($_POST["btnJD_Submit"]))
 	$jd_comp = $jd_ed = $jd_jb = $jd_jd = $jd_jr = $jd_jt = $jd_sa = $jd_sd = "";
 }
 
+$comp_arr = array();
+
+$query = "SELECT * FROM companies";
+
+$stmt = $mysql->prepare($query);
+$stmt->execute();
+$stmt->bind_result($cid, $desc, $addr, $phone, $email, $name);
+while($stmt->fetch() === true)
+{
+	$comp_arr[] = array("CompanyID"=>$cid,"CompanyName"=>$name,"CompanyDescription"=>$desc,"CompanyAddress"=>$addr,"CompanyPhone"=>$phone,"CompanyEmail"=>$email);
+}
+$stmt->close();
+
 $mysql->close();
 ?>
+<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="jQueryAssets/jquery.ui-1.10.4.datepicker.min.js" type="text/javascript"></script>
+
 <form id="form1" name="form1" method="post">
   <p>DATABASE MODIFICATION SCRIPT</p>
-  <p>This script is used for entering data directly into the database for testing purposes. No data validation is performed.<br>
+  <p>This script is used for entering data directly into the database for testing purposes. No data validation is performed.</p>
+  <p>&nbsp;</p>
+  <p>
+    <input type="text" id="Datepicker1">
+    <br>
   </p>
   <hr>
 <!--  
@@ -335,3 +345,12 @@ End date:
   </p>
 </form>";
 ?>
+<script type="text/javascript">
+$(function() {
+	$( "#Datepicker1" ).datepicker({
+		changeMonth:true,
+		changeYear:true,
+		showButtonPanel:true
+	}); 
+});
+  </script>
