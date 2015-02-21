@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2015 at 02:51 PM
+-- Generation Time: Feb 21, 2015 at 02:57 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `codefest`
 --
+CREATE DATABASE IF NOT EXISTS `codefest` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
+USE `codefest`;
 
 -- --------------------------------------------------------
 
