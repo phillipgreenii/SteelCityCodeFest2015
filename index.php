@@ -52,8 +52,8 @@
 					<div id="div_login">
 						<form class="login" id="login_form" autocomplete="off"> 
 							<p>
-								<label for="login">Username:</label>
-								<input type="text" name="login" id="login" value="">  
+								<label for="user">Username:</label>
+								<input type="text" name="user" id="user" value="">  
 							</p>
 
 							<p>
@@ -65,7 +65,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="register" class="btn btn-primary">Register</button> 
-					<button type="button" id="login" class="btn btn-primary">Login</button>
+					<button type="button" id="login_user" class="btn btn-primary">Login</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					
 				</div>

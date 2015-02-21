@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
-	$("body").on("click", "#register", function() {
+	$("body").on("click", "#register", function() { 
 		window.location.href = "Registration.php";
 	});
 	
@@ -14,7 +14,24 @@ $(document).ready(function(){
 			alert(data);
 		})
 		.fail(function() {
-		
+			alert(data);
 		})
 	});
+	
+	$("body").on("click", "#login_user", function() {
+		//alert("made it");
+		$.ajax({ 
+			type: 'POST',
+			url: 'rest/Authenticate.php', 
+			data: $('#login_form').serialize()
+		})
+		.success(function(data){  
+			alert(data);
+		})
+		.fail(function() {
+			alert(data);
+		})
+	});
+	
+	
 });

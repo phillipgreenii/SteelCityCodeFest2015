@@ -36,61 +36,61 @@ $pageContents = <<< EOPAGE
 	<div id="content">
 		<div id="registration">
 			<form id="reg">
-				<p>
+				<div class="form-group">
 					<label for="fname">First Name:</label>
 					<input type="text" name="fname" id="fname">  
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<label for="m_init">Middle Initial:</label>
 					<input type="text" name="m_init" id="m_init">  
-				</p>
+				</div>
 
-				<p>
+				<div class="form-group">
 					<label for="lname">Last Name:</label>
 					<input type="text" name="lname" id="lname">
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<label for="suffix">Suffix:</label>
 					<input type="text" name="suffix" id="suffix">
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<label for="email">Email:</label>
 					<input type="text" name="email" id="email">  
-				</p>
+				</div>
 
-				<p>
+				<div class="form-group">
 					<label for="phone">Phone Number:</label>
 					<input type="text" name="phone" id="phone">
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<label for="user">Username:</label>
 					<input type="text" name="user" id="user">  
-				</p>
+				</div>
 
-				<p>
+				<div class="form-group">
 					<label for="pass">Password:</label>
 					<input type="password" name="pass" id="pass">
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<label for="con_pass">Confirm Password:</label>
 					<input type="password" name="con_pass" id="con_pass">  
-				</p>
+				</div>
  
-				<p>
+				<div class="form-group">
 					<label for="lname">Last Name:</label> 
 					<input type="checkbox" name="user_type" value="type_user">Candidates<br>
 					<input type="checkbox" name="user_type" value="type_emp">Employer<br>
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
 					<button type="button" id="sub_reg" class="btn btn-primary">Register</button> 
 					<button type="button" id="login" class="btn">Clear</button>
-				</p>
+				</div>
 				
 			</form>
 		</div>
