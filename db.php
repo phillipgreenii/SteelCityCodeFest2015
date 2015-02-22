@@ -3,18 +3,16 @@
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
+$dbname = "codefest";
 
-function dbConnect($db="") {
-global $dbhost, $dbuser, $dbpass;
+$_connection = NULL;
 
-//FIXME enable once DB is available
-// $dbcnx = @mysqli_connect($dbhost, $dbuser, $dbpass)
-// or die("The site database appears to be down.");
-//
-// if ($db!="" and !@mysqli_select_db($db)) {
-//   die("The site database is unavailable.");
-// }
+function db_open() {
+  global $dbhost, $dbuser, $dbpass, $dbname;
 
-return $dbcnx;
+  if(empty($_connection)) {
+    $_connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname) or die("The site database appears to be down.");;
+  }
+
+  return $_connection;
 }
-?>
