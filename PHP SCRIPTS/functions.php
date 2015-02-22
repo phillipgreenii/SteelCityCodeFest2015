@@ -41,22 +41,56 @@ function GetJobListJSON()
 	$query = "SELECT j.JobID, j.JobTitle, j.Description AS JobDescription, j.Requirements, j.Salary, j.StartDate, j.EndDate, j.Benefits, c.CompanyID, c.Description AS CompanyDescription, c.Address, c.Phone, c.Email, c.CompanyName FROM jobs as j INNER JOIN companyjobs as cj ON j.JobID = cj.JobID INNER JOIN companies AS c ON cj.CompanyID = c.CompanyID";
 	$job_arr = array();
 	$stmt = $mysql->prepare($query);
-	$stmt->execute();
+	if(!$stmt)
+	{
+		echo "Failed to prepare $query<br />";
+		echo "<pre>";
+		print_r($mysql);
+		echo "</pre>";
+		die();
+	}
+	if(!$stmt->execute())
+	{
+		echo $query."<br />";
+		echo "<pre>";
+		print_r($mysql);
+		echo "<br /><br />";
+		print_r($stmt);
+		echo "</pre>";
+		die();
+	}
 	$stmt->bind_result($jid, $jtitle, $jdesc, $jreq, $jsal, $jstart, $jend, $jbenefits, $cid, $cdesc, $caddr, $cphone, $cemail, $cname);
 	while($stmt->fetch() === true)
 	{
 		$job_arr[] = array("Tags"=>"","JobID"=>$jid,"JobDescription"=>$jdesc,"Requirements"=>$jreq,"Salary"=>$jsal,"StartDate"=>$jstart,"EndDate"=>$jend,"Benefits"=>$jbenefits,"CompanyID"=>$cid,"CompanyDescription"=>$cdesc, "Address"=>$caddr,"Phone"=>$cphone,"Email"=>$cemail,"CompanyName"=>$cname);
 	}
 	$stmt->close();
-	$query = "SELECT TagName FROM tags INNER JOIN jobtags ON tags.TagID = jobtags.TagID WHERE jobtags.JobID = ?";
+	$query = "SELECT TagText FROM tags INNER JOIN jobtags ON tags.TagID = jobtags.TagID WHERE jobtags.JobID = ?";
 	$index = -1;
 	foreach($job_arr as $line)
 	{
 		++$index;
 		$jid = intval($line["JobID"]);
 		$stmt = $mysql->prepare($query);
+		if(!$stmt)
+		{
+			echo "Failed to prepare $query<br />";
+			echo "<pre>";
+			print_r($mysql);
+			echo "</pre>";
+			die();
+		}
 		$stmt->bind_param("i", $jid);
-		$stmt->execute();
+		if(!$stmt->execute())
+		{
+			echo $query."<br />";
+			echo "<pre>";
+			print_r($mysql);
+			echo "<br /><br />";
+			print_r($stmt);
+			echo "</pre>";
+			die();
+		}
 		$stmt->bind_result($tag);
 		while($stmt->fetch() === true)
 		{
