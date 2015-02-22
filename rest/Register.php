@@ -46,11 +46,11 @@ $password_confirmation = retrieveParameter("con_pass", true);
 
 $person = new stdClass;
 $person->first_name = retrieveParameter("fname", true);
-$person->middle_initial = retrieveParameter("m_init", false);
+$person->middle_initial = retrieveParameter("m_init", true);
 $person->last_name = retrieveParameter("lname", true);
-$person->suffix = retrieveParameter("suffix", false);
+$person->suffix = retrieveParameter("suffix", true);
 $person->email = retrieveParameter("email", true);
-$person->phone = retrieveParameter("phone", false);
+$person->phone = retrieveParameter("phone", true);
 
 $roles = retrieveParameter("user_type", true);
 $roles = correctRoles($roles);
