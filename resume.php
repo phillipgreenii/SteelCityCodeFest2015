@@ -38,6 +38,7 @@ EOQ;
 
   $person = new stdClass;
   $resume = new stdClass;
+  $resume->id = $resume_id;
   $resume->person = $person;
 
 
@@ -48,10 +49,11 @@ EOQ;
                           $person->middle_initial, $person->suffix,
                           $person->email, $person->phone);
   $statement->execute();
+  $found = $statement->get_result()->num_rows > 0;
   $statement->fetch();
   $statement->close();
 
-  if($connection->field_count <= 0) {
+  if(!$found) {
     //no results
     return NULL;
   }
