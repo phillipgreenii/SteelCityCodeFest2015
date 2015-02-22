@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2015 at 07:37 PM
+-- Generation Time: Feb 21, 2015 at 09:19 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -109,6 +109,41 @@ INSERT INTO `companyjobs` (`CompanyID`, `JobID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `education`
+--
+
+DROP TABLE IF EXISTS `education`;
+CREATE TABLE IF NOT EXISTS `education` (
+  `EducationID` int(11) NOT NULL AUTO_INCREMENT,
+  `Degree` text COLLATE latin1_general_ci NOT NULL,
+  `School` text COLLATE latin1_general_ci NOT NULL,
+  `StartDate` datetime NOT NULL,
+  `EndDate` datetime NOT NULL,
+  `CourseList` text COLLATE latin1_general_ci NOT NULL,
+  `Description` text COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`EducationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `experience`
+--
+
+DROP TABLE IF EXISTS `experience`;
+CREATE TABLE IF NOT EXISTS `experience` (
+  `ExperienceID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` text COLLATE latin1_general_ci NOT NULL,
+  `Company` text COLLATE latin1_general_ci NOT NULL,
+  `StartDate` datetime NOT NULL,
+  `EndDate` datetime NOT NULL,
+  `Description` text COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`ExperienceID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobs`
 --
 
@@ -200,6 +235,80 @@ INSERT INTO `jobtags` (`JobID`, `TagID`) VALUES
 (17, 3),
 (30, 3),
 (31, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `references`
+--
+
+DROP TABLE IF EXISTS `references`;
+CREATE TABLE IF NOT EXISTS `references` (
+  `ReferenceID` int(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` text COLLATE latin1_general_ci NOT NULL,
+  `LastName` text COLLATE latin1_general_ci NOT NULL,
+  `Phone` text COLLATE latin1_general_ci NOT NULL,
+  `Email` text COLLATE latin1_general_ci NOT NULL,
+  `Relation` text COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`ReferenceID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resumeeducation`
+--
+
+DROP TABLE IF EXISTS `resumeeducation`;
+CREATE TABLE IF NOT EXISTS `resumeeducation` (
+  `ResumeID` int(11) NOT NULL,
+  `EducationID` int(11) NOT NULL,
+  PRIMARY KEY (`ResumeID`,`EducationID`),
+  KEY `EducationID` (`EducationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resumeexperience`
+--
+
+DROP TABLE IF EXISTS `resumeexperience`;
+CREATE TABLE IF NOT EXISTS `resumeexperience` (
+  `ResumeID` int(11) NOT NULL,
+  `ExperienceID` int(11) NOT NULL,
+  PRIMARY KEY (`ResumeID`,`ExperienceID`),
+  KEY `ExperienceID` (`ExperienceID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resumereferences`
+--
+
+DROP TABLE IF EXISTS `resumereferences`;
+CREATE TABLE IF NOT EXISTS `resumereferences` (
+  `ReferenceID` int(11) NOT NULL,
+  `ResumeID` int(11) NOT NULL,
+  PRIMARY KEY (`ReferenceID`,`ResumeID`),
+  KEY `ResumeID` (`ResumeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resumes`
+--
+
+DROP TABLE IF EXISTS `resumes`;
+CREATE TABLE IF NOT EXISTS `resumes` (
+  `ResumeID` int(11) NOT NULL AUTO_INCREMENT,
+  `Introduction` text COLLATE latin1_general_ci NOT NULL,
+  `KeyPoints` text COLLATE latin1_general_ci NOT NULL,
+  `UserID` int(11) NOT NULL,
+  PRIMARY KEY (`ResumeID`,`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -325,6 +434,27 @@ ALTER TABLE `companyjobs`
 ALTER TABLE `jobtags`
   ADD CONSTRAINT `jobtags_ibfk_2` FOREIGN KEY (`TagID`) REFERENCES `tags` (`TagID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `jobtags_ibfk_1` FOREIGN KEY (`JobID`) REFERENCES `jobs` (`JobID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `resumeeducation`
+--
+ALTER TABLE `resumeeducation`
+  ADD CONSTRAINT `resumeeducation_ibfk_2` FOREIGN KEY (`ResumeID`) REFERENCES `resumes` (`ResumeID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `resumeeducation_ibfk_1` FOREIGN KEY (`EducationID`) REFERENCES `education` (`EducationID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `resumeexperience`
+--
+ALTER TABLE `resumeexperience`
+  ADD CONSTRAINT `resumeexperience_ibfk_2` FOREIGN KEY (`ExperienceID`) REFERENCES `experience` (`ExperienceID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `resumeexperience_ibfk_1` FOREIGN KEY (`ResumeID`) REFERENCES `resumes` (`ResumeID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `resumereferences`
+--
+ALTER TABLE `resumereferences`
+  ADD CONSTRAINT `resumereferences_ibfk_2` FOREIGN KEY (`ResumeID`) REFERENCES `resumes` (`ResumeID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `resumereferences_ibfk_1` FOREIGN KEY (`ReferenceID`) REFERENCES `references` (`ReferenceID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `usercompany`
