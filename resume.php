@@ -49,8 +49,10 @@ EOQ;
                           $person->middle_initial, $person->suffix,
                           $person->email, $person->phone);
   $statement->execute();
-  $found = $statement->get_result()->num_rows > 0;
+  $statement->store_result();
   $statement->fetch();
+  $found = $statement->num_rows > 0;
+
   $statement->close();
 
   if(!$found) {
