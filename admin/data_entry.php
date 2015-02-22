@@ -40,21 +40,55 @@ if(isset($_POST["btnST_Submit"]))
 	$stmt = $mysql->prepare($query);
 	$tagtext = "";
 	$stmt->bind_param("s", $st_tag);
-	$stmt->execute();
+	if(!$stmt->execute())
+	{
+		echo $query."<br />";
+		echo "<pre>";
+		print_r($mysql);
+		echo "<br /><br />";
+		print_r($stmt);
+		echo "</pre>";
+		die();
+	}
 	$stmt->close();
 	$query = "SELECT TagID FROM tags WHERE TagText = ?";
 	$stmt = $mysql->prepare($query);
 	$stmt->bind_param("s", $st_tag);
-	$stmt->execute();
+	if(!$stmt->execute())
+	{
+		echo $query."<br />";
+		echo "<pre>";
+		print_r($mysql);
+		echo "<br /><br />";
+		print_r($stmt);
+		echo "</pre>";
+		die();
+	}
 	$stmt->bind_result($tid);
 	$stmt->fetch();
 	$stmt->close();
 	$query = "INSERT INTO jobtags(JobID, TagID) VALUES(?,?)";
 	$stmt = $mysql->prepare($query);
+	if(!$stmt)
+	{
+		echo $query."<br />";
+		echo "<pre>";
+		print_r($mysql);
+		die();
+	}
 	$stmt->bind_param("ii", $jid, $tid);
 	foreach($st_jobs as $jid)
 	{
-		$stmt->execute();
+		if(!$stmt->execute())
+		{
+			echo $query."<br />";
+			echo "<pre>";
+			print_r($mysql);
+			echo "<br /><br />";
+			print_r($stmt);
+			echo "</pre>";
+			die();
+		}
 	}
 	$stmt->close();
 }
@@ -243,7 +277,7 @@ while($stmt->fetch() === true)
 }
 $stmt->close();
 
-$query = "SELECT j.JobiD, j.JobTitle, c.CompanyName FROM jobs as j INNER JOIN companyjobs as cj ON j.JobID = cj.JobID INNER JOIN companies as c ON cj.CompanyID = c.CompanyID";
+$query = "SELECT j.JobID, j.JobTitle, c.CompanyName FROM jobs as j INNER JOIN companyjobs as cj ON j.JobID = cj.JobID INNER JOIN companies as c ON cj.CompanyID = c.CompanyID";
 $stmt = $mysql->prepare($query);
 $stmt->execute();
 $stmt->bind_result($jid, $jtit, $cname);
@@ -388,9 +422,9 @@ End date:
     <select name='cboST_Jobs[]' size='5' multiple='MULTIPLE' id='cboST_Jobs'>";
 	foreach($job_arr as $line)
 	{
-		$jid = $job_arr["JobID"];
-		$name = $job_arr["JobTitle"];
-		$comp = $job_arr["CompanyName"];
+		$jid = $line["JobID"];
+		$name = $line["JobTitle"];
+		$comp = $line["CompanyName"];
 		echo "<option value='".$jid."'>".$name." (".$comp.")</option>";
 	}
     echo"</select>
