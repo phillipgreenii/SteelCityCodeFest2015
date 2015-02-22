@@ -1,6 +1,7 @@
 <?php
 
 include_once '../user.php';
+include_once '../support.php';
 
 $errors = [];
 $return_code = NULL;
@@ -70,11 +71,7 @@ if(!empty($errors)) {
 if(empty($return_code)) {
   try {
     $user_id = user_register($user_name, $password, $person, $roles);
-
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = "ViewUser.php?id=$user_id";
-    header("Location: http://$host$uri/$extra");
+    add_location_header("ViewUser.php?id=$user_id");
     $return_code = 201;
   } catch (Exception $e) {
     $errors[] = $e->getMessage();
