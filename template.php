@@ -1,6 +1,12 @@
 <?php
 include_once 'user.php';
 
+function page_not_found() {
+  http_response_code(404);
+  echo wrap_full_template('<h1>Page Not Found!</h1>');
+  exit;
+}
+
 function wrap_full_template($content) {
 
 if(user_is_authenticated()) {

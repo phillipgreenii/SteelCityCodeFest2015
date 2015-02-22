@@ -7,6 +7,9 @@ function resume_lookup_id_for_user($user_id) {
 
 
 function resume_load($resume_id) {
+  if($resume_id < 0) {
+      return NULL;
+  }
 
   $person = new stdClass;
   $person->first_name = "John";
