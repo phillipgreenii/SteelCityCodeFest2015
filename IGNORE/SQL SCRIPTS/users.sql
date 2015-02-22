@@ -51,9 +51,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
 
 INSERT INTO `users` (`UserID`, `Username`, `Password`, `Email`, `Phone`, `FirstName`, `LastName`, `MiddleInitial`, `Suffix`, `Salt`) VALUES
-(1, 'dhartenbach', 'de82822026e5d57bd0a46bcccf1ddf9bf35db28d', 'deh5021@gmail.com', '7249410932', 'Daniel', 'Hartenbach', 'E', '', '54ea0947c4e1b'),
-(2, 'amarks', '29d8767d2fa0d23e616c500606d2f323c14f6051', 'armarks@edmc.edu', '9994445454', 'Arthur', 'Marks', '', '', '54ea096962a9c'),
-(3, 'staylor', '2618d8eeb38db5666975df4fd945cc4512e3f384', 'staylor@edmc.edu', '8833383383', 'Sean', 'Taylor', '', '', '54ea09834ea2c');
+(1, 'dhartenbach', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'deh5021@gmail.com', '7249410932', 'Daniel', 'Hartenbach', 'E', '', '54ea1254d66b5'),
+(2, 'amarks', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'armarks@edmc.edu', '9994445454', 'Arthur', 'Marks', '', '', '54ea1254d66b5'),
+(3, 'staylor', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'staylor@edmc.edu', '8833383383', 'Sean', 'Taylor', '', '', '54ea1254d66b5'),
+(4, 'pgreen', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'pgreen@fake.com', '5555555555', 'Phillip', 'Green', '', 'II', '54ea1254d66b5');
 
 
 ALTER TABLE `usercompany`
