@@ -1,5 +1,10 @@
 <?php
 
+if('POST' !== $_SERVER['REQUEST_METHOD']) {
+  http_response_code(405);
+  exit;
+}
+
 include_once '../user.php';
 include_once '../support.php';
 
