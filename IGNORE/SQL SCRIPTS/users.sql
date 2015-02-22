@@ -32,7 +32,8 @@ INSERT INTO `userroles` (`RoleID`, `UserID`) VALUES
 (1, 1),
 (2, 1),
 (1, 2),
-(2, 3);
+(2, 3),
+(1, 4);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -55,7 +56,6 @@ INSERT INTO `users` (`UserID`, `Username`, `Password`, `Email`, `Phone`, `FirstN
 (2, 'amarks', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'armarks@edmc.edu', '9994445454', 'Arthur', 'Marks', '', '', '54ea1254d66b5'),
 (3, 'staylor', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'staylor@edmc.edu', '8833383383', 'Sean', 'Taylor', '', '', '54ea1254d66b5'),
 (4, 'pgreen', 'ae4085f685e95fa7ac7d517540394d9b03d88ca0', 'pgreen@fake.com', '5555555555', 'Phillip', 'Green', '', 'II', '54ea1254d66b5');
-
 
 ALTER TABLE `usercompany`
   ADD CONSTRAINT `usercompany_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `companies` (`CompanyID`) ON DELETE CASCADE ON UPDATE CASCADE,
