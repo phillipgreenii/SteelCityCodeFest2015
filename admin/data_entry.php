@@ -1,8 +1,37 @@
 <?php
-$host = "localhost";
-$username = "codefest";
-$password = "codefest";
-$database = "codefest";
+function include_exists ($fileName){
+    if (realpath($fileName) == $fileName) {
+        return is_file($fileName);
+    }
+    if ( is_file($fileName) ){
+        return true;
+    }
+
+    $paths = explode(PATH_SEPARATOR, get_include_path());
+    foreach ($paths as $path) {
+        $rp = substr($path, -1) == DIRECTORY_SEPARATOR ? $path.$fileName : $path.DIRECTORY_SEPARATOR.$fileName;
+        if ( is_file($rp) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+if(include_exists("vars.php"))
+{
+	include_once("vars.php");
+	$host = $GBL_DBHOST;
+	$username = $GBL_DBUSER;
+	$password = $GBL_DBPASS;
+	$database = $GBL_DBNAME;
+}
+else
+{
+	$host = "localhost";
+	$username = "codefest";
+	$password = "codefest";
+	$database = "codefest";
+}
 
 $mysql = new mysqli($host, $username, $password, $database);
 
