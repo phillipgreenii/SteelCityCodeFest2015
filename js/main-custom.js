@@ -4,17 +4,17 @@ $(document).ready(function(){
 	});
 	
 	$("body").on("click", "#sub_reg", function() {
-		alert("made it");
+		//alert("made it");
 		$.ajax({ 
 			type: 'POST',
 			url: 'rest/Register.php', 
 			data: $('#reg').serialize()
 		})
 		.success(function(data){  
-			alert(data);
+			//alert(data);
 		})
 		.fail(function() {
-			alert(data);
+			//alert(data);
 		})
 	});
 	
@@ -26,10 +26,10 @@ $(document).ready(function(){
 			data: $('#login_form').serialize()
 		})
 		.success(function(data){  
-			alert(data);
+			//alert(data);
 		})
 		.fail(function(data) {
-			alert("failure");
+			//alert("failure");
 		})
 	});
 	
