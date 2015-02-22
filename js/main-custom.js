@@ -1,37 +1,41 @@
-$(document).ready(function(){ 
-	$("body").on("click", "#register", function() { 
+$(document).ready(function(){
+	$("body").on("click", "#register", function() {
 		window.location.href = "Registration.php";
 	});
-	
+
 	$("body").on("click", "#sub_reg", function() {
 		//alert("made it");
-		$.ajax({ 
+		$.ajax({
 			type: 'POST',
-			url: 'rest/Register.php', 
+			url: 'rest/Register.php',
 			data: $('#reg').serialize()
 		})
-		.success(function(data){  
+		.success(function(data){
 			//alert(data);
 		})
 		.fail(function() {
 			//alert(data);
 		})
 	});
-	
+
 	$("body").on("click", "#login_user", function() {
 		//alert("made it");
-		$.ajax({ 
+		$.ajax({
 			type: 'POST',
-			url: 'rest/Authenticate.php', 
+			url: 'rest/Authenticate.php',
 			data: $('#login_form').serialize()
 		})
-		.success(function(data){  
-			//alert(data);
+		.success(function(data){
+			window.location.href = "Portal.php";
 		})
-		.fail(function(data) { 
-			//alert("failure");
+		.fail(function(err) {
+			if(err.status === 401) {
+				alert('Username and Password are not valid');
+			} else {
+				alert("Unable to authenticate");
+			}
 		})
 	});
-	
-	
+
+
 });
