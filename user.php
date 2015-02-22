@@ -1,6 +1,15 @@
 <?php
 include_once 'db.php';
+include_once 'support.php';
 session_start();
+
+function user_redirect_if_not_authenticated() {
+  if(!user_is_authenticated()) {
+    add_location_header("?login=true");
+    http_response_code(302);
+    exit();
+  }
+}
 
 function user_is_authenticated() {
   return isset($_SESSION['user_id']);

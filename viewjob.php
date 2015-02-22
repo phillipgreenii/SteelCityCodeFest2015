@@ -1,11 +1,9 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Untitled Document</title>
-</head>
+<?php
+include_once 'template.php';
+include_once 'user.php';
+user_redirect_if_not_authenticated();
 
-<body>
+$pageContents = <<< EOPAGE
 <label for="textfield">Job Title:</label>
 <input type="text" name="jobtitle" id="jobtitle"><br>
 <label for="textfield">Description:</label>
@@ -20,5 +18,7 @@
 <input type="text" name="duration" id="duration"><br>
 <label for="textfield">Benefits:</label>
 <input type="text" name="benefits" id="benefits"><br>
-</body>
-</html>
+EOPAGE;
+
+echo wrap_full_template($pageContents);
+?>
