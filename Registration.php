@@ -19,6 +19,7 @@ $pageContents = <<< EOPAGE
 </head>
 
 <body>
+<div>
 	<div id="head">
 		<span id="header">Coder's Haven</span>
 		<span id="slogan">Catchy Slogan will live here</span>
@@ -38,53 +39,53 @@ $pageContents = <<< EOPAGE
 			<form id="reg">
 				<div class="form-group">
 					<label for="fname">First Name:</label>
-					<input type="text" name="fname" id="fname">  
+					<input type="text" class="form-control" name="fname" id="fname">  
 				</div>
 				
 				<div class="form-group">
 					<label for="m_init">Middle Initial:</label>
-					<input type="text" name="m_init" id="m_init">  
+					<input type="text" class="form-control" name="m_init" id="m_init">  
 				</div>
 
 				<div class="form-group">
 					<label for="lname">Last Name:</label>
-					<input type="text" name="lname" id="lname">
+					<input type="text" class="form-control" name="lname" id="lname">
 				</div>
 				
 				<div class="form-group">
 					<label for="suffix">Suffix:</label>
-					<input type="text" name="suffix" id="suffix">
+					<input type="text" class="form-control" name="suffix" id="suffix">
 				</div>
 				
 				<div class="form-group">
 					<label for="email">Email:</label>
-					<input type="text" name="email" id="email">  
+					<input type="text" class="form-control" name="email" id="email">  
 				</div>
 
 				<div class="form-group">
 					<label for="phone">Phone Number:</label>
-					<input type="text" name="phone" id="phone">
+					<input type="text" class="form-control" name="phone" id="phone">
 				</div>
 				
 				<div class="form-group">
 					<label for="user">Username:</label>
-					<input type="text" name="user" id="user">  
+					<input type="text" class="form-control" name="user" id="user">  
 				</div>
 
 				<div class="form-group">
 					<label for="pass">Password:</label>
-					<input type="password" name="pass" id="pass">
+					<input type="password" class="form-control" name="pass" id="pass">
 				</div>
 				
 				<div class="form-group">
 					<label for="con_pass">Confirm Password:</label>
-					<input type="password" name="con_pass" id="con_pass">  
+					<input type="password" class="form-control" name="con_pass" id="con_pass">  
 				</div>
  
-				<div class="form-group">
-					<label for="lname">Last Name:</label> 
-					<input type="checkbox" name="user_type" value="type_user">Candidates<br>
-					<input type="checkbox" name="user_type" value="type_emp">Employer<br>
+				<div class="form-group"> 
+					<label for="user_type">Role:</label><br>
+					<input type="checkbox" name="user_type[]" value="type_user">Candidate<br>
+					<input type="checkbox" name="user_type[]" value="type_emp">Employer<br>
 				</div>
 				
 				<div class="form-group">
@@ -95,7 +96,7 @@ $pageContents = <<< EOPAGE
 			</form>
 		</div>
 	</div>
-  
+</div>  
 	<footer class="footer">
 		<div class="container">
 			<p class="text-muted">Product of Steel City Codefest 2015.</p>
