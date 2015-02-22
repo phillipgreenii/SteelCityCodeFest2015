@@ -37,5 +37,25 @@ $(document).ready(function(){
 		})
 	});
 
+	$("body").on("click", "#sub_res", function() {
+		//alert("made it");
+		$.ajax({
+			type: 'POST',
+			url: 'rest/Resume.php',
+			data: $('#res_form').serialize()
+		})
+		.success(function(data){
+			alert("resume submitted");
+		})
+		.fail(function(err) {
+			/**if(err.status === 401) {
+				alert('Username and Password are not valid');
+			} else {
+				alert("Unable to authenticate");**/
+				alert(err);
+			}
+		})
+	});
+
 
 });

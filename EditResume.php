@@ -5,7 +5,7 @@ user_redirect_if_not_authenticated();
 
 
 $pageContents = <<< EOPAGE
-<form>
+<form id="res_form">
   <div class="form-group">
     <label for="intro">Introduction:</label>
     <input type="text" class="form-control" name="intro" id="intro">
