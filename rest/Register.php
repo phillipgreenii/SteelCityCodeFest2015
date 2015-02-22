@@ -18,6 +18,28 @@ function retrieveParameter($name, $required) {
   }
 }
 
+function correctRoles($roles) {
+  global $errors;
+
+  if(empty($roles)) {
+    $roles = array();
+  }
+
+  $corrected_roles = [];
+
+  foreach ($roles as $role) {
+    if($role == 'type_user') {
+      $corrected_roles[] = 'Candidate';
+    } else if($role == 'type_emp') {
+      $corrected_roles[] = 'Employer';
+    } else {
+      $errors[] = "Unexpected Role: " . $role;
+    }
+  }
+
+  return $corrected_roles;
+}
+
 $user_name = retrieveParameter("user", true);
 $password = retrieveParameter("pass", true);
 $password_confirmation = retrieveParameter("con_pass", true);
@@ -29,6 +51,9 @@ $person->last_name = retrieveParameter("lname", true);
 $person->suffix = retrieveParameter("suffix", false);
 $person->email = retrieveParameter("email", true);
 $person->phone = retrieveParameter("phone", false);
+
+$roles = retrieveParameter("user_type", true);
+$roles = correctRoles($roles);
 
 if(empty($errors) and ($password !== $password_confirmation)) {
   $errors[] = "Passwords don't match";
@@ -44,7 +69,7 @@ if(!empty($errors)) {
 
 if(empty($return_code)) {
   try {
-    $user_id = user_register($user_name, $password, $person);
+    $user_id = user_register($user_name, $password, $person, $roles);
     $return_code = 201;
   } catch (Exception $e) {
     $errors[] = $e->getMessage();

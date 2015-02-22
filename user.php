@@ -31,12 +31,27 @@ function user_available_user_name($user_name) {
   return empty(_user_load_credentials($user_name));
 }
 
-function user_register($user_name, $password, $person) {
+function user_register($user_name, $password, $person, $roles) {
+  $user_id = _insert_user($user_name, $password, $person);
+
+  if(!empty($user_id)) {
+    $inserted = _update_roles_for_user($user_id, $roles);
+  } else {
+    $inserted = false;
+  }
+
+  return $inserted;
+}
+
+function _insert_user($user_name, $password, $person) {
   $salt = _user_generate_salt();
   $parameters = clone $person;
 
   $password = _user_hash_password($password, $salt);
 
+  $connection = db_open();
+
+  // insert
   $query = "
   INSERT INTO users
   (Username, Password, Salt, Email, Phone, FirstName, LastName, MiddleInitial, Suffix)
@@ -44,16 +59,55 @@ function user_register($user_name, $password, $person) {
   (?,?,?,?,?,?,?,?,?)
   ";
 
-  $connection = db_open();
-
   $statement = $connection->prepare($query);
-
   $statement->bind_param('sssssssss', $user_name, $password, $salt, $person->email, $person->phone, $person->first_name, $person->last_name, $person->middle_initial, $person->suffix);
-  $inserted = $statement->execute();
-
+  $statement->execute();
+  $user_id = $connection->insert_id;
   $statement->close();
 
-  return $inserted;
+  return $user_id;
+}
+
+function _update_roles_for_user($user_id, $roles) {
+  if(empty($roles)) {
+    throw new Exception('Roles can not be empty');
+  }
+
+  $connection = db_open();
+
+  //find role ids
+  $role_ids = [];
+  $query = 'select RoleID from roles where 1=2';
+  foreach($roles as $role) {
+    $query = $query . ' or RoleName = ?';
+  }
+  $statement = $connection->prepare($query);
+  foreach($roles as $role) {
+    $statement->bind_param('s', $role);
+  }
+  $statement->bind_result($role_id);
+  $statement->execute();
+  while ($statement->fetch()) {
+    $role_ids[] = $role_id;
+  }
+  $statement->close();
+
+  // delete current roles
+  $query = 'delete from userroles where UserID = ?';
+  $statement = $connection->prepare($query);
+  $statement->bind_param('i', $user_id);
+  $inserted = $statement->execute();
+  $statement->close();
+
+  //insert roles
+  $query = 'insert into userroles (UserID, RoleID) values (?, ?)';
+  $statement = $connection->prepare($query);
+  foreach($role_ids as $role_id) {
+    $statement->bind_param('ii', $user_id, $role_id);
+    $statement->execute();
+  }
+  $statement->close();
+
 }
 
 function _user_load_credentials($user_name) {
