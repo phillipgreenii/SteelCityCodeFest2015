@@ -26,7 +26,12 @@ $pageContents = <<< EOPAGE
 			<ul id="nav">
 				<li class="li_Nav"><a href="#">Home</a></li>
 				<li class="li_Nav"><a href="#">Job Search</a></li>
-				<li class="li_Nav"><a href="#">Resume</a></li>
+				<li class="li_Nav"><a href="#">Resume</a>
+					<ul>
+						<li class="li_Nav">View</li>
+						<li class="li_Nav">Edit</li>
+					</ul>
+				</li>
 				<li class="li_Nav"><a href="#">Browse</a></li>
 				<li class="li_Nav" data-toggle="modal" data-target="#myModal"><a href="#">Login</a></li>
 			</ul>
