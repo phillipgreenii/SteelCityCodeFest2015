@@ -22,13 +22,12 @@ $pageContents = <<< EOPAGE
 	<div id="head">
 		<span id="header">Coder's Haven</span>
 		<span id="slogan">Catchy Slogan will live here</span>
-		<div id="head_nav"> 
+		<div id="head_nav">
 			<ul id="nav">
 				<li class="li_Nav"><a href="#">Home</a></li>
 				<li class="li_Nav"><a href="#">Job Search</a></li>
 				<li class="li_Nav"><a href="#">Resume</a></li>
 				<li class="li_Nav"><a href="#">Browse</a></li>
-				<li class="li_Nav" data-toggle="modal" data-target="#myModal"><a href="#">Login</a></li>
 			</ul>
 		</div>
 	</div>
