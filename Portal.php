@@ -11,6 +11,7 @@ if(user_is_candidate()) {
   <h2>Candidate Links</h2>
   <ul>
   <li><a href="ViewResume.php">View Resume</a></li>
+  <li><a href="EditResume.php">Edit Resume</a></li>
   </ul>
   </div>
 EOL;

@@ -90,8 +90,8 @@ $pageContents = <<< EOPAGE
 		<span id="slogan">Catchy Slogan will live here</span>
 		<div id="head_nav">
 			<ul id="nav">
-				<li class="li_Nav"><a href="#">Home</a></li>
-				<li class="li_Nav"><a href="#">About</a></li>
+				<li class="li_Nav"><a href="Portal.php">Home</a></li>
+				<li class="li_Nav"><a href="index.php">About</a></li>
 				<li class="li_Nav"><a href="#">Contact</a></li>
 				<li class="li_Nav"><a href="#">Browse</a></li>
         {$login_logout_link}

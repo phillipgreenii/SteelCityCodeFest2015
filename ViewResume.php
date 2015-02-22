@@ -76,6 +76,7 @@ if(!empty($resume->references)) {
 }
 
 $pageContents = <<< EOPAGE
+<a href="EditResume.php">Edit</a>
 <h1>{$resume->person->first_name}
 {$resume->person->middle_initial}
 {$resume->person->last_name}
