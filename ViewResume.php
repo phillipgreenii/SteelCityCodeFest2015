@@ -75,8 +75,14 @@ if(!empty($resume->references)) {
 
 }
 
+if(user_is_candidate() && ($resume->id == resume_lookup_id_for_user(user_retrieve_current_id()))) {
+  $editResumeLink = '<a href="EditResume.php">Edit</a>';
+} else {
+  $editResumeLink = "";
+}
+
 $pageContents = <<< EOPAGE
-<a href="EditResume.php">Edit</a>
+{$editResumeLink}
 <h1>{$resume->person->first_name}
 {$resume->person->middle_initial}
 {$resume->person->last_name}
