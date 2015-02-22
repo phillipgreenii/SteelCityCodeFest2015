@@ -32,12 +32,67 @@ if(isset($_GET["id"]) && !empty($_GET["id"])) {
   exit;
 }
 
+$experience_section = "";
+if(!empty($resume->experiences)) {
+  $experience_section = "<div><h2>Experience</h2><dl>";
+  forEach($resume->experiences as $experience) {
+    $title = "<dt>{$experience->title} ({$experience->company})</dt>";
+    $dates = "<dd>{$experience->start_date} - {$experience->end_date}</dd>";
+    $description = "<dd>{$experience->description}</dd>";
+    $experience_section = $experience_section . $title . $dates . $description;
+  }
+  $experience_section = $experience_section . "</dl></div>";
+
+}
+
+
+$education_section = "";
+if(!empty($resume->educations)) {
+  $education_section = "<div><h2>Education</h2><dl>";
+  forEach($resume->educations as $education) {
+    $school = "<dt>{$education->school}</dt>";
+    $degree = "<dd>{$education->degree}</dd>";
+    $dates = "<dd>{$education->start_date} - {$education->end_date}</dd>";
+    $description = "<dd>{$education->description}</dd>";
+    $course_list = "<dd>{$education->course_list}</dd>";
+    $education_section = $education_section . $school. $degree . $dates . $description . $course_list;
+  }
+  $education_section = $education_section . "</dl></div>";
+
+}
+
+
+$references_section = "";
+if(!empty($resume->references)) {
+  $references_section = "<div><h2>References</h2><dl>";
+  forEach($resume->references as $reference) {
+    $name = "<dt>{$reference->first_name} {$reference->last_name} ({$reference->relation})</dt>";
+    $email = "<dd>{$reference->email}</dd>";
+    $phone = "<dd>{$reference->phone}</dd>";
+    $references_section = $references_section . $name . $email . $phone;
+  }
+  $references_section = $references_section . "</dl></div>";
+
+}
 
 $pageContents = <<< EOPAGE
 <h1>{$resume->person->first_name}
-{$resume->person->last_name}</h1>
+{$resume->person->middle_initial}
+{$resume->person->last_name}
+{$resume->person->suffix}</h1>
+<h2>{$resume->person->email}</h2>
+<h2>{$resume->person->phone}</h2>
+
 
 <p>$resume->introduction</p>
+<p>$resume->key_points</p>
+
+{$experience_section}
+
+{$education_section}
+
+{$references_section}
+
 EOPAGE;
 
 echo wrap_full_template($pageContents);
