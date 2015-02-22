@@ -52,11 +52,11 @@ $password_confirmation = retrieveParameter("con_pass", true);
 
 $person = new stdClass;
 $person->first_name = retrieveParameter("fname", true);
-$person->middle_initial = retrieveParameter("m_init", true);
+$person->middle_initial = retrieveParameter("m_init", false);
 $person->last_name = retrieveParameter("lname", true);
-$person->suffix = retrieveParameter("suffix", true);
+$person->suffix = retrieveParameter("suffix", false);
 $person->email = retrieveParameter("email", true);
-$person->phone = retrieveParameter("phone", true);
+$person->phone = retrieveParameter("phone", false);
 
 $roles = retrieveParameter("user_type", true);
 $roles = correctRoles($roles);
