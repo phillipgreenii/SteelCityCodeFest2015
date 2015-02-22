@@ -6,10 +6,12 @@ $errors = [];
 $return_code = NULL;
 
 function retrieveParameter($name, $required) {
-  if(isset($_POST[$name])) {
+  global $_POST, $errors;
+
+  if(isset($_POST[$name]) && !empty($_POST[$name])) {
     return $_POST[$name];
   } else if($required) {
-    $errors[] = "Missing required field: " + $name;
+    $errors[] = "Missing required field: " . $name;
     return NULL;
   } else {
     return NULL;
@@ -27,7 +29,6 @@ $person->last_name = retrieveParameter("lname", true);
 $person->suffix = retrieveParameter("suffix", false);
 $person->email = retrieveParameter("email", true);
 $person->phone = retrieveParameter("phone", false);
-
 
 if(empty($errors) and ($password !== $password_confirmation)) {
   $errors[] = "Passwords don't match";
@@ -52,7 +53,7 @@ if(empty($return_code)) {
 }
 
 if(!empty($errors)) {
-  $data = json_encode(array("errors"=>$errors));
+  $data = array("errors"=>$errors);
 } else {
   $data = NULL;
 }
