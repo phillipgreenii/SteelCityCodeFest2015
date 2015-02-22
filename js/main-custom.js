@@ -11,10 +11,10 @@ $(document).ready(function(){
 			data: $('#reg').serialize()
 		})
 		.success(function(data){
-			//alert(data);
+			window.location.href = "index.php?login=true";
 		})
 		.fail(function() {
-			//alert(data);
+			alert("Unable to process your registration form");
 		})
 	});
 

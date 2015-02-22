@@ -70,17 +70,23 @@ if(!empty($errors)) {
 if(empty($return_code)) {
   try {
     $user_id = user_register($user_name, $password, $person, $roles);
+
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "ViewUser.php?id=$user_id";
+    header("Location: http://$host$uri/$extra");
     $return_code = 201;
   } catch (Exception $e) {
     $errors[] = $e->getMessage();
     $return_code = 500;
+    $user_id = NULL;
   }
 }
 
 if(!empty($errors)) {
   $data = array("errors"=>$errors);
 } else {
-  $data = NULL;
+  $data = array("user_id"=>$user_id);
 }
 
 header('Content-Type: application/json');

@@ -40,7 +40,11 @@ function user_register($user_name, $password, $person, $roles) {
     $inserted = false;
   }
 
-  return $inserted;
+  if ($inserted) {
+    return $user_id;
+  } else {
+    return NULL;
+  }
 }
 
 function _insert_user($user_name, $password, $person) {
@@ -108,6 +112,7 @@ function _update_roles_for_user($user_id, $roles) {
   }
   $statement->close();
 
+  return true;
 }
 
 function _user_load_credentials($user_name) {

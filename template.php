@@ -7,12 +7,21 @@ if(user_is_authenticated()) {
   $login_logout_link = '<li class="li_Nav"><a href="Logout.php">Logout</a></li>';
   $login_modal = '';
 
-
-
-
-
 } else {
   $login_logout_link = '<li class="li_Nav" data-toggle="modal" data-target="#myModal"><a href="#">Login</a></li>';
+
+  if(isset($_GET['login']) && strtolower($_GET['login']) == 'true') {
+    $pop_login = <<<EOPOP
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('#myModal').modal('show');
+        });
+    </script>
+EOPOP;
+  } else {
+    $pop_login = '';
+  }
+
   $login_modal = <<<EOMODAL
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -46,6 +55,7 @@ if(user_is_authenticated()) {
     </div>
   </div>
 </div>
+{$pop_login}
 EOMODAL;
 
 }
@@ -94,7 +104,6 @@ $pageContents = <<< EOPAGE
 	</footer>
 
   {$login_modal}
-
 </body>
 </html>
 EOPAGE;
