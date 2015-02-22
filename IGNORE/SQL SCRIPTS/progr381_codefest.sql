@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2015 at 09:19 PM
+-- Generation Time: Feb 21, 2015 at 11:00 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -393,11 +393,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Username` varchar(30) COLLATE latin1_general_ci NOT NULL,
   `Password` text COLLATE latin1_general_ci NOT NULL,
   `Email` text COLLATE latin1_general_ci NOT NULL,
-  `Phone` text COLLATE latin1_general_ci NOT NULL,
+  `Phone` text COLLATE latin1_general_ci,
   `FirstName` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `LastName` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `MiddleInitial` varchar(1) COLLATE latin1_general_ci NOT NULL,
-  `Suffix` varchar(6) COLLATE latin1_general_ci NOT NULL COMMENT 'Junior, Senior, Jr, Sr, III, etc',
+  `MiddleInitial` varchar(1) COLLATE latin1_general_ci DEFAULT NULL,
+  `Suffix` varchar(6) COLLATE latin1_general_ci DEFAULT NULL COMMENT 'Junior, Senior, Jr, Sr, III, etc',
   `Salt` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Username` (`Username`)
