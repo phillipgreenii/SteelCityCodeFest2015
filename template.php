@@ -103,11 +103,7 @@ $pageContents = <<< EOPAGE
   {$content}
 	</div>
 
-	<footer class="footer">
-		<div class="container">
-			<p class="text-muted">Product of Steel City Codefest 2015.</p>
-		</div>
-	</footer>
+
 
   {$login_modal}
 </body>
@@ -116,4 +112,12 @@ EOPAGE;
 
 return $pageContents;
 }
+
+/**<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Product of Steel City Codefest 2015.</p>
+  </div>
+</footer>
+**/
+
 ?>
