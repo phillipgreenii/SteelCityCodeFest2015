@@ -53,7 +53,7 @@ $(document).ready(function(){
 			} else {
 				alert("Unable to authenticate");**/
 				alert(err);
-			}
+			//}
 		})
 	});
 
