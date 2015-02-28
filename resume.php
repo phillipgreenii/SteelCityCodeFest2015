@@ -18,6 +18,9 @@ function resume_lookup_id_for_user($user_id) {
   }
 }
 
+function resume_save($user_id, $resume) {
+  throw new Exception('resume_save() not implemented');
+}
 
 function resume_load($resume_id) {
   if(empty($resume_id)) {
