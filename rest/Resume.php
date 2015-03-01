@@ -2,6 +2,7 @@
 
 include_once '../resume.php';
 include_once '../user.php';
+include_once '../support.php';
 
 
 if('GET' == $_SERVER['REQUEST_METHOD']) {
@@ -57,8 +58,15 @@ function doPost() {
 
   if(empty($return_code)) {
     try {
-      resume_save(user_retrieve_current_id(), $resume);
-      $return_code = 204;
+      $user_id = user_retrieve_current_id();
+      $newly_created_resume_id = resume_save($user_id, $resume);
+
+      if($newly_created_resume_id !== NULL) {
+        add_location_header("../ViewResume.php?id=$newly_created_resume_id");
+        $return_code = 201;
+      } else {
+        $return_code = 204;
+      }
     } catch (Exception $e) {
       $errors[] = $e->getMessage();
       $return_code = 500;
