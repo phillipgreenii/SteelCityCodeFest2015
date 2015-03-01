@@ -41,7 +41,11 @@ function user_logout() {
 }
 
 function user_retrieve_current_id() {
-  return $_SESSION['user_id'] or die('no current user id');
+  if(!user_is_authenticated()) {
+    die('no current user id');
+  }
+
+  return $_SESSION['user_id'];
 }
 
 function user_available_user_name($user_name) {
@@ -136,7 +140,7 @@ function _user_load_credentials($user_name) {
   $query = "
   SELECT UserID, Password, Salt
   FROM users
-  WHERE Username = ?
+  WHERE lower(Username) = lower(?)
   ";
 
   $connection = db_open();
